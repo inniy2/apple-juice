@@ -1,0 +1,46 @@
+package com.bss.grape.entity;
+
+import java.sql.Timestamp;
+
+public class DashBoard {
+
+	private Long dash_board_id;
+	private String shard;
+	private String table_schema;
+	private String table_definition;
+	private Timestamp start_time;
+	
+	public Long getDash_board_id() {
+		return dash_board_id;
+	}
+	public void setDash_board_id(Long dash_board_id) {
+		this.dash_board_id = dash_board_id;
+	}
+	public String getShard() {
+		return shard;
+	}
+	public void setShard(String shard) {
+		this.shard = shard;
+	}
+	public String getTable_schema() {
+		return table_schema;
+	}
+	public void setTable_schema(String table_schema) {
+		this.table_schema = table_schema;
+	}
+	public String getTable_definition() {
+		return table_definition;
+	}
+	public void setTable_definition(String table_definition) {
+		this.table_definition = table_definition;
+	}
+	public Timestamp getStart_time() {
+		return start_time;
+	}
+	public void setStart_time(Timestamp start_time) {
+		this.start_time = start_time;
+	}
+	
+	
+	
+}

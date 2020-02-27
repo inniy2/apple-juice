@@ -1,52 +1,28 @@
 package com.bss.grape.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "user")
 public class User {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "user_id", nullable = false)
-	private long userId;
-	
-	@Column(name = "user_name", nullable = false)
-	private String userName ;
-	
-	@Column(name = "pass_word", nullable = false)
-	private String passWord;
-
-	
-	public long getId() {
-		return userId;
+	private long user_id;
+	private String user_names ;
+	private String pass_word;
+	public long getUser_id() {
+		return user_id;
 	}
-
-	public void setId(long userId) {
-		this.userId = userId;
+	public void setUser_id(long user_id) {
+		this.user_id = user_id;
 	}
-
-	public String getUserName() {
-		return userName;
+	public String getUser_name() {
+		return user_names;
 	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUser_name(String user_names) {
+		this.user_names = user_names;
 	}
-
-	public String getPassWord() {
-		return passWord;
+	public String getPass_word() {
+		return pass_word;
 	}
-
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
+	public void setPass_word(String pass_word) {
+		this.pass_word = pass_word;
 	}
-	
 	
 
 }

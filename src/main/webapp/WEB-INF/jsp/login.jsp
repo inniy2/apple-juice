@@ -10,10 +10,10 @@
 <body>
     <script src="/js/main.js"></script>
     <form action="login" method="post">
-		<input type="text" placeholder="Enter Username" name="uname" required>
-		<input type="password" placeholder="Enter Password" name="psw" required>
+		<input type="text" placeholder="Enter Username" name="user_name" required>
+		<input type="password" placeholder="Enter Password" name="password" required>
 		<button type="submit">Login</button>
     </form>
-    commit test 
+    <h2 class="hello-title">${message}</h2>
 </body>
 </html>
