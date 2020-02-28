@@ -20,6 +20,7 @@
     		<td>Schema</td>
     		<td>Definition</td>
     		<td>Start Time</td>
+    		<td>User Id</td>
     	</tr>
 			<c:forEach var="item" items="${dashboard}" varStatus="loop">
 				<tr>
@@ -28,11 +29,17 @@
 					<td>${item.table_schema}</td>
 					<td>${item.table_definition}</td>
 					<td>${item.start_time}</td>
+					<td>${item.user_id}</td>
 				</tr>
 			</c:forEach>
     </table>
     <br>
-    <a href="/alterRegistration?user_name=${user_name}">New Alter</a>
+    
+    
+    <form action="/alterUserInput" method="post">
+		<input type="hidden" name="user_name" value="${user_name}">
+		<button type="submit">New Alter</button>
+    </form>
     
 </body>
 </html>

@@ -10,6 +10,7 @@ public class AlterRegistration {
 	private String table_definition;
 	private String master_host;
 	private String ghost_host;
+	private String slave_host;
 	private String alter_statement;
 	public Long getAlter_id() {
 		return alter_id;
@@ -58,6 +59,12 @@ public class AlterRegistration {
 	}
 	public void setAlter_statement(String alter_statement) {
 		this.alter_statement = alter_statement;
+	}
+	public String getSlave_host() {
+		return slave_host;
+	}
+	public void setSlave_host(String slave_host) {
+		this.slave_host = slave_host;
 	}
 	
 }

@@ -27,6 +27,9 @@ public class DashBoard {
 	private String tableDefinition;
 	@Column(name = "start_time", nullable = false)
 	private Timestamp startTime;
+	@Column(name = "user_id", nullable = false)
+	private String userId;
+	
 	
 	public Long getId() {
 		return id;
@@ -57,6 +60,12 @@ public class DashBoard {
 	}
 	public void setStartTime(Timestamp startTime) {
 		this.startTime = startTime;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	
 	

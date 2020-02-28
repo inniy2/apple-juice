@@ -13,15 +13,16 @@
     <h2 class="hello-title">${message}</h2>
     <h2 class="hello-title">Hello ${user_name}</h2>
     
-    <form action="/alterRegistration" method="post">
+    <form action="/checkDryRun" method="post">
     	<input hidden="text" name="user_name" value="${user_name}">
 		<input type="text" placeholder="Shard Name" name="shard" required>
 		<input type="text" placeholder="Table Schema Name" name="table_schema" required>
 		<input type="text" placeholder="Table Definition Name" name="table_definition" required>
 		<input type="text" placeholder="MySQL Master Host Name" name="master_host" required>
 		<input type="text" placeholder="Ghost Host Name" name="ghost_host" required>
+		<input type="text" placeholder="Slave Host Name" name="slave_host" required>
 		<textarea placeholder="Alter Statement" name="alter_statement" required></textarea>
-		<button type="submit">register</button>
+		<button type="submit">run test</button>
     </form>
  
 </body>

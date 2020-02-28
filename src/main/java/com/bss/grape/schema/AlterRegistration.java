@@ -27,6 +27,8 @@ public class AlterRegistration {
 	private String masterHost;
 	@Column(name = "ghost_host", nullable = false)
 	private String ghostHost;
+	@Column(name = "slave_host", nullable = false)
+	private String slaveHost;
 	@Column(name = "alter_statement", nullable = false)
 	private String alterStatement;
 	
@@ -77,6 +79,12 @@ public class AlterRegistration {
 	}
 	public void setAlterStatement(String alterStatement) {
 		this.alterStatement = alterStatement;
+	}
+	public String getSlaveHost() {
+		return slaveHost;
+	}
+	public void setSlaveHost(String slaveHost) {
+		this.slaveHost = slaveHost;
 	}
 	
 	

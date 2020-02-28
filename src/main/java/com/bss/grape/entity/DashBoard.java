@@ -9,6 +9,7 @@ public class DashBoard {
 	private String table_schema;
 	private String table_definition;
 	private Timestamp start_time;
+	private String user_id;
 	
 	public Long getDash_board_id() {
 		return dash_board_id;
@@ -40,7 +41,12 @@ public class DashBoard {
 	public void setStart_time(Timestamp start_time) {
 		this.start_time = start_time;
 	}
-	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	
 	
 }
