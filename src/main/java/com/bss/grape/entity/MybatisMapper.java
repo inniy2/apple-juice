@@ -34,12 +34,13 @@ public interface MybatisMapper {
 	//AlterRegister
 	@Insert("INSERT INTO alter_registration (user_name, shard, table_schema, table_definition, master_host, ghost_host, slave_host, alter_statement) "
 			+ "VALUES(#{user_name}, #{shard}, #{table_schema}, #{table_definition}, #{master_host}, #{ghost_host}, #{slave_host}, #{alter_statement})")
-	@Options(useGeneratedKeys = true, keyProperty = "alter_id")
-	void alterRegInsert(AlterRegistration alterReg);
+	@Options(useGeneratedKeys = true, keyProperty = "alter_id", keyColumn = "alter_id")
+	int alterRegInsert(AlterRegistration alterReg);
 	
 	@Select("SELECT alter_id FROM alter_registration "
-			+ "WHERE user_name = #{user_name} AND shard = #{shard} AND table_schema = #{table_schema} AND table_definition = #{table_definition} AND master_host = #{master_host} AND ghost_host = #{ghost_host} AND slave_host = #{slave_host} AND alter_statement = #{alter_statement}")
-	AlterRegistration alterRegSelectId(AlterRegistration alterReg);
+			+ "WHERE shard = #{shard} AND table_schema = #{table_schema} AND table_definition = #{table_definition}")
+	AlterRegistration alterRegSelectId(AlterRegistration alterReg) throws Exception;
+	
 	
 	
 }

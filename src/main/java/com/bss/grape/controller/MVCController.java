@@ -4,6 +4,7 @@ package com.bss.grape.controller;
 
 import java.sql.Timestamp;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -92,22 +93,20 @@ public class MVCController {
     		@RequestParam(value="ghost_host", required=false, defaultValue="") String ghost_host,
     		@RequestParam(value="slave_host", required=false, defaultValue="") String slave_host,
     		@RequestParam(value="alter_statement", required=false, defaultValue="") String alter_statement) {
+		AlterRegistration alterReg = new AlterRegistration();
+		alterReg.setUser_name(user_name);
+		alterReg.setShard(shard);
+		alterReg.setTable_schema(table_schema);
+		alterReg.setTable_definition(table_definition);
+		alterReg.setMaster_host(master_host);
+		alterReg.setGhost_host(ghost_host);
+		alterReg.setSlave_host(slave_host);
+		alterReg.setAlter_statement(alter_statement);
 		
-//		AlterRegistration alterReg = new AlterRegistration();
-//		alterReg.setUser_name(user_name);
-//		alterReg.setShard(shard);
-//		alterReg.setTable_schema(table_schema);
-//		alterReg.setTable_definition(table_definition);
-//		alterReg.setMaster_host(master_host);
-//		alterReg.setGhost_host(ghost_host);
-//		alterReg.setSlave_host(slave_host);
-//		alterReg.setAlter_statement(alter_statement);
-//		
-//		mybatisMapper.alterRegInsert(alterReg);
-//		AlterRegistration alterId = mybatisMapper.alterRegSelectId(alterReg);
 		
 		model.addAttribute("user_name", user_name);
-//		model.addAttribute("alter_id", alterId.getAlter_id());
+		model.addAttribute("alterReg", alterReg);
+//		model.addAttribute("alterId", alter_id);
 		return "checkdryrun";
 		
 	}
@@ -123,7 +122,6 @@ public class MVCController {
     		@RequestParam(value="ghost_host", required=false, defaultValue="") String ghost_host,
     		@RequestParam(value="slave_host", required=false, defaultValue="") String slave_host,
     		@RequestParam(value="alter_statement", required=false, defaultValue="") String alter_statement) {
-		
 		DashBoard dashBoard = new DashBoard();
 		dashBoard.setShard(shard);
 		dashBoard.setTable_schema(table_schema);
@@ -132,6 +130,11 @@ public class MVCController {
 		dashBoard.setStart_time(timestamp);
 		dashBoard.setUser_id(user_name);
 		mybatisMapper.bashBoardInsert(dashBoard);
+		
+		/*
+		 * TO DO
+		 * Run gh-ost
+		 */
 		
 		model.addAttribute("user_name", user_name);
 		redirectAttributes.addAttribute("user_name", user_name);

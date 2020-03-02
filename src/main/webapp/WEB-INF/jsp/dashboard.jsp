@@ -21,6 +21,8 @@
     		<td>Definition</td>
     		<td>Start Time</td>
     		<td>User Id</td>
+    		<td>Status</td>
+    		
     	</tr>
 			<c:forEach var="item" items="${dashboard}" varStatus="loop">
 				<tr>
@@ -30,6 +32,7 @@
 					<td>${item.table_definition}</td>
 					<td>${item.start_time}</td>
 					<td>${item.user_id}</td>
+					<td>Running</td>
 				</tr>
 			</c:forEach>
     </table>
