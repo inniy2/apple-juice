@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>New Alter user input</title>
+<link href="../css/main.css" rel="stylesheet">
+<script src="../js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../js/hello.js"></script>
+</head>
+<body>
+    <h2 class="hello-title" th:text="${message}"></h2>
+    <h2 class="hello-title" th:text="'Hello '+${user_name}"></h2>
+	<li th:text="'Master is' + ${alterReg.master_host}"/>
+	
+
+	<div>
+		<p class="greeting-id">The ID is </p>
+		<p class="greeting-content">The content is </p>
+	</div>
+</body>
+</html>

@@ -7,9 +7,9 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link href="/css/main.css" rel="stylesheet">
+    <script src="/js/main.js"></script>
 </head>
 <body>
-    <script src="/js/main.js"></script>
     <h2 class="hello-title">${message}</h2>
     <h2 class="hello-title">Hello ${user_name}</h2>
     
