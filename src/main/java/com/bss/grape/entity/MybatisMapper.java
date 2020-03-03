@@ -24,22 +24,29 @@ public interface MybatisMapper {
 	@Select("SELECT dash_board_id, shard, table_schema, table_definition, start_time, user_id, status FROM dash_board")
 	List<DashBoard> dashBoardSelectAll();
 	
+	@Select("SELECT count(*) FROM dash_board "
+			+ "WHERE shard = #{shard} AND table_schema = #{table_schema} AND table_definition = #{table_definition}")
+	int dashBoardUniqueCount(DashBoard dashboard);
+	
 	@Insert("INSERT INTO dash_board (shard, table_schema, table_definition, start_time, user_id, status) "
 			+ "VALUES(#{shard}, #{table_schema}, #{table_definition}, #{start_time}, #{user_id}, #{status})")
 	@Options(useGeneratedKeys = true, keyProperty = "dash_board_id")
-	void bashBoardInsert(DashBoard dashBoard);
+	void bashBoardInsert(DashBoard dashboard);
+	
+	
 	
 	
 	
 	//AlterRegister
+	@Select("SELECT alter_id FROM alter_registration "
+			+ "WHERE shard = #{shard} AND table_schema = #{table_schema} AND table_definition = #{table_definition}")
+	AlterRegistration alterRegSelectId(AlterRegistration alterReg) throws Exception;
+	
 	@Insert("INSERT INTO alter_registration (user_name, shard, table_schema, table_definition, master_host, ghost_host, slave_host, alter_statement) "
 			+ "VALUES(#{user_name}, #{shard}, #{table_schema}, #{table_definition}, #{master_host}, #{ghost_host}, #{slave_host}, #{alter_statement})")
 	@Options(useGeneratedKeys = true, keyProperty = "alter_id", keyColumn = "alter_id")
 	int alterRegInsert(AlterRegistration alterReg);
 	
-	@Select("SELECT alter_id FROM alter_registration "
-			+ "WHERE shard = #{shard} AND table_schema = #{table_schema} AND table_definition = #{table_definition}")
-	AlterRegistration alterRegSelectId(AlterRegistration alterReg) throws Exception;
 	
 	
 	

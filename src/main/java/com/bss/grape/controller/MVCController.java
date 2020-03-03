@@ -66,8 +66,10 @@ public class MVCController {
 	@GetMapping({"/dashBoard"})
 	public String dashBoard(Model model,
 			RedirectAttributes redirectAttributes,
-    		@RequestParam(value="user_name", required=false, defaultValue="") String user_name) {
+    		@RequestParam(value="user_name", required=false, defaultValue="") String user_name,
+    		@RequestParam(value="message", required=false, defaultValue="") String message) {
 		model.addAttribute("user_name", user_name);
+		model.addAttribute("message", message);
 		model.addAttribute("dashboard", mybatisMapper.dashBoardSelectAll());
 		return "dashboard";
 	}
@@ -104,8 +106,19 @@ public class MVCController {
 		alterReg.setAlter_statement(alter_statement);
 		
 		/*
-		 * TO-DO prevent dual insert in dashbo
+		 * TO-DO prevent dual insert in dashboard
 		 */
+		DashBoard dashboard = new DashBoard();
+		dashboard.setShard(shard);
+		dashboard.setTable_schema(table_schema);
+		dashboard.setTable_definition(table_definition);
+		int count = mybatisMapper.dashBoardUniqueCount(dashboard);
+		if(count >= 1) {
+			model.addAttribute("user_name", user_name);
+			redirectAttributes.addAttribute("user_name", user_name);
+			redirectAttributes.addAttribute("message", shard+"."+table_schema+"."+table_definition+" is in progress!");
+			return "redirect:/dashBoard";
+		}
 		
 		model.addAttribute("user_name", user_name);
 		model.addAttribute("alterReg", alterReg);
