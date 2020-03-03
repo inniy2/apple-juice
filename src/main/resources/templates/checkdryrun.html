@@ -2,21 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>New Alter user input</title>
+<title>New Check dry run</title>
 <link href="../css/main.css" rel="stylesheet">
 <script src="../js/main.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="../js/hello.js"></script>
+<script src="../js/checkdryrun.js"></script>
 </head>
 <body>
     <h2 class="hello-title" th:text="${message}"></h2>
     <h2 class="hello-title" th:text="'Hello '+${user_name}"></h2>
-	<li th:text="'Master is' + ${alterReg.master_host}"/>
+    
 	
-
 	<div>
-		<p class="greeting-id">The ID is </p>
-		<p class="greeting-content">The content is </p>
+		<p th:text="'Master is ' + ${alterReg.master_host}"/>
+		<p th:text="'Syntax is ' + ${alterReg.alter_statement}"/>
+		<p class="mysql-space" > The space is </p>
+		<p class="mysql-table-definition">Show create table is </p>
 	</div>
+	
+	
+    <form action="/alterUserInput" method="post">
+    	<input hidden="text" name="user_name" th:value="${user_name}">
+		<button type="submit">cancel</button>
+    </form>
+    
+     <form action="/execute" method="post">
+    	<input hidden="text" name="user_name" th:value="${user_name}">
+    	<input hidden="text" name="shard" th:value="${alterReg.shard}">
+		<input hidden="text" name="table_schema" th:value="${alterReg.table_schema}">
+		<input hidden="text" name="table_definition" th:value="${alterReg.table_definition}">
+		<input hidden="text" name="master_host" th:value="${alterReg.master_host}">
+		<input hidden="text" name="ghost_host" th:value="${alterReg.ghost_host}">
+		<input hidden="text" name="slave_host" th:value="${alterReg.slave_host}">
+		<input hidden="text" name="alter_statement" th:value="${alterReg.alter_statement}">
+		<button type="submit">execute</button>
+    </form>
+    
+    
 </body>
 </html>

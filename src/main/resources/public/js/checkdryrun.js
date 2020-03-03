@@ -3,17 +3,17 @@
  */
 $(document).ready(function() {
     $.ajax({
-        url: "/api/greeting"
+        url: "/api/checkdisk"
     }).then(function(data) {
-       $('.greeting-id').append(data);
+       $('.mysql-space').append(data);
     });
 });
 
 
 $(document).ready(function() {
     $.ajax({
-        url: "/api/greeting2"
+        url: "/api/checkdefinition"
     }).then(function(data) {
-       $('.greeting-content').append(data);
+       $('.mysql-table-definition').append(data);
     });
 });

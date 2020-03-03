@@ -5,10 +5,14 @@
 <title>New Dash Board</title>
 <link href="../css/main.css" rel="stylesheet">
 <script src="../js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../js/dashboard.js"></script>
 </head>
 <body>
     <h2 class="hello-title" th:text="${message}"></h2>
     <h2 class="hello-title" th:text="'Hello '+${user_name}"></h2>
+    
+    <a href="/login">LOG OUT</a>
 	<table border="1">
     	<tr>
     		<td>No</td>
@@ -26,7 +30,12 @@
 			<td th:text="${item.table_definition}"/>
 			<td th:text="${item.start_time}"/>
 			<td th:text="${item.user_id}"/>
-			<td th:text="'Running'"/>
+			<td>
+				<span th:if="${item.status} == 'cut-over'">
+					<button class="cut-over" th:id=${item.dash_board_id} th:text="${item.status}" th:value=${item.dash_board_id}/>
+				</span>
+				<span th:unless="${item.status == 'cut-over'}" th:text="${item.status}"/>
+			</td>
 		</tr>
     </table>
     <br>
@@ -34,5 +43,7 @@
 		<input type="hidden" name="user_name" th:value="${user_name}">
 		<button type="submit">New Alter</button>
     </form>
+    
+    
 </body>
 </html>

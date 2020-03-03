@@ -10,6 +10,7 @@ public class DashBoard {
 	private String table_definition;
 	private Timestamp start_time;
 	private String user_id;
+	private String status;
 	
 	public Long getDash_board_id() {
 		return dash_board_id;
@@ -46,6 +47,12 @@ public class DashBoard {
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

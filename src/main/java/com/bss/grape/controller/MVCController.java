@@ -103,6 +103,9 @@ public class MVCController {
 		alterReg.setSlave_host(slave_host);
 		alterReg.setAlter_statement(alter_statement);
 		
+		/*
+		 * TO-DO prevent dual insert in dashbo
+		 */
 		
 		model.addAttribute("user_name", user_name);
 		model.addAttribute("alterReg", alterReg);
@@ -129,6 +132,7 @@ public class MVCController {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		dashBoard.setStart_time(timestamp);
 		dashBoard.setUser_id(user_name);
+		dashBoard.setStatus("running");
 		mybatisMapper.bashBoardInsert(dashBoard);
 		
 		/*

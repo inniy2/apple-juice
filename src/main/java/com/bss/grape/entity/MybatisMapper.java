@@ -21,11 +21,11 @@ public interface MybatisMapper {
 	
 	
 	//DashBoard
-	@Select("SELECT dash_board_id, shard, table_schema, table_definition, start_time, user_id FROM dash_board")
+	@Select("SELECT dash_board_id, shard, table_schema, table_definition, start_time, user_id, status FROM dash_board")
 	List<DashBoard> dashBoardSelectAll();
 	
-	@Insert("INSERT INTO dash_board (shard, table_schema, table_definition, start_time, user_id) "
-			+ "VALUES(#{shard}, #{table_schema}, #{table_definition}, #{start_time}, #{user_id})")
+	@Insert("INSERT INTO dash_board (shard, table_schema, table_definition, start_time, user_id, status) "
+			+ "VALUES(#{shard}, #{table_schema}, #{table_definition}, #{start_time}, #{user_id}, #{status})")
 	@Options(useGeneratedKeys = true, keyProperty = "dash_board_id")
 	void bashBoardInsert(DashBoard dashBoard);
 	
