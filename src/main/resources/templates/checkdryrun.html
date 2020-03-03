@@ -20,14 +20,15 @@
 		<p class="mysql-table-definition">Show create table is </p>
 	</div>
 	
+
 	
     <form action="/alterUserInput" method="post">
     	<input hidden="text" name="user_name" th:value="${user_name}">
 		<button type="submit">cancel</button>
     </form>
     
-     <form action="/execute" method="post">
-    	<input hidden="text" name="user_name" th:value="${user_name}">
+     <form id="form" action="execute" method="post">
+    	<input hidden="text" id="user_name" name="user_name" th:value="${user_name}">
     	<input hidden="text" name="shard" th:value="${alterReg.shard}">
 		<input hidden="text" name="table_schema" th:value="${alterReg.table_schema}">
 		<input hidden="text" name="table_definition" th:value="${alterReg.table_definition}">
@@ -35,7 +36,7 @@
 		<input hidden="text" name="ghost_host" th:value="${alterReg.ghost_host}">
 		<input hidden="text" name="slave_host" th:value="${alterReg.slave_host}">
 		<input hidden="text" name="alter_statement" th:value="${alterReg.alter_statement}">
-		<button type="submit">execute</button>
+		<button id="submitButton">execute</button>
     </form>
     
     

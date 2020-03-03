@@ -24,8 +24,12 @@ public class GrapeController {
 	@RequestMapping(value="/api/cutover", method=RequestMethod.GET)
 	@ResponseBody
 	public void cutover(@RequestParam(value="board_id", required=false, defaultValue="") String board_id) {
-		
 		System.out.println(board_id);
 	}
 
+	@RequestMapping(value="/api/execute", method=RequestMethod.GET)
+	@ResponseBody
+	public void execute(@RequestParam(value="user_name", required=false, defaultValue="") String user_name) {
+		System.out.println(user_name);
+	}
 }
