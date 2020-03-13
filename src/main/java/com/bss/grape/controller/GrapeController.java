@@ -6,19 +6,56 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bss.orange.Ghost.APIResponse;
+import com.bss.orange.Ghost.diskRequest;
+import com.bss.orange.Ghost.definitionRequest;
+import com.bss.orange.ghostGrpc;
+import com.bss.orange.ghostGrpc.ghostBlockingStub;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+
 @RestController
 public class GrapeController {
 	
 	@RequestMapping(value="/api/checkdisk", method=RequestMethod.GET)
 	@ResponseBody
 	public String checkDisk() {
-		return "300G";
+		// Create channel
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090).usePlaintext().build();
+
+		// Create stub object
+		ghostBlockingStub ghostStub = ghostGrpc.newBlockingStub(channel);
+		
+		// Construct request
+		diskRequest diskRequest = com.bss.orange.Ghost.diskRequest.newBuilder().setDir("/mysql/data").build();
+		
+		// Call
+		APIResponse respone = ghostStub.diskcheck(diskRequest);
+		
+		System.out.println(respone.getResponsemessage());
+		return respone.getResponsemessage();
 	}
 	
 	@RequestMapping(value="/api/checkdefinition", method=RequestMethod.GET)
 	@ResponseBody
 	public String checkDefinition() {
-		return "CREATE TABLE ....";
+		// Create channel
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090).usePlaintext().build();
+
+		// Create stub object
+		ghostBlockingStub ghostStub = ghostGrpc.newBlockingStub(channel);
+		
+		// Construct request
+		definitionRequest definitionRequest = com.bss.orange.Ghost.definitionRequest.newBuilder().
+				setSchemaname("test").
+				setTablename("test_tbl1").build();
+		
+		// Call
+		APIResponse respone = ghostStub.checkdefinition(definitionRequest);
+		
+		System.out.println(respone.getResponsemessage());
+		return respone.getResponsemessage();
 	}
 
 	@RequestMapping(value="/api/cutover", method=RequestMethod.GET)

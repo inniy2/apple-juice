@@ -120,6 +120,11 @@ public class MVCController {
 			return "redirect:/dashBoard";
 		}
 		
+		/*
+		 * TO-DO
+		 * Implement orange-juice client to call dry run
+		 */
+		
 		model.addAttribute("user_name", user_name);
 		model.addAttribute("alterReg", alterReg);
 //		model.addAttribute("alterId", alter_id);
