@@ -2,6 +2,7 @@
  * 
  */
 $(document).ready(function() {
+	/*
     $.ajax({
         url: "/api/checkdisk"
     }).then(function(data) {
@@ -13,7 +14,7 @@ $(document).ready(function() {
     }).then(function(data) {
        $('.mysql-table-definition').append(data);
     });
-    
+    */
     $('#submitButton').click(function() {
     	var user_name = $('#user_name').val();
     	$.ajax({

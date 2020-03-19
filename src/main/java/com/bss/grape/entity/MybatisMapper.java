@@ -21,15 +21,15 @@ public interface MybatisMapper {
 	
 	
 	//DashBoard
-	@Select("SELECT dash_board_id, shard, table_schema, table_definition, start_time, user_id, status FROM dash_board")
+	@Select("SELECT dash_board_id, ghost_host, table_schema, table_definition, statement, start_time, user_id, status FROM dash_board")
 	List<DashBoard> dashBoardSelectAll();
 	
 	@Select("SELECT count(*) FROM dash_board "
-			+ "WHERE shard = #{shard} AND table_schema = #{table_schema} AND table_definition = #{table_definition}")
+			+ "WHERE ghost_host = #{ghost_host} AND table_schema = #{table_schema} AND table_definition = #{table_definition}")
 	int dashBoardUniqueCount(DashBoard dashboard);
 	
-	@Insert("INSERT INTO dash_board (shard, table_schema, table_definition, start_time, user_id, status) "
-			+ "VALUES(#{shard}, #{table_schema}, #{table_definition}, #{start_time}, #{user_id}, #{status})")
+	@Insert("INSERT INTO dash_board (ghost_host, table_schema, table_definition, statement, start_time, user_id, status) "
+			+ "VALUES(#{ghost_host}, #{table_schema}, #{table_definition}, #{statement}, #{start_time}, #{user_id}, #{status})")
 	@Options(useGeneratedKeys = true, keyProperty = "dash_board_id")
 	void bashBoardInsert(DashBoard dashboard);
 	

@@ -16,7 +16,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bss.grape.entity.MybatisMapper;
 import com.bss.grape.entity.User;
-import com.bss.grape.entity.AlterRegistration;
+import com.bss.orange.ghostGrpc;
+import com.bss.orange.Ghost.APIResponse;
+import com.bss.orange.Ghost.definitionRequest;
+import com.bss.orange.Ghost.diskRequest;
+import com.bss.orange.Ghost.ghostRequest;
+import com.bss.orange.ghostGrpc.ghostBlockingStub;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+
 import com.bss.grape.entity.DashBoard;
 
 
@@ -88,47 +97,83 @@ public class MVCController {
 	public String checkDryRun(Model model,
 			RedirectAttributes redirectAttributes,
     		@RequestParam(value="user_name", required=false, defaultValue="") String user_name,
-    		@RequestParam(value="shard", required=false, defaultValue="") String shard,
+    		@RequestParam(value="ghost_host", required=false, defaultValue="") String ghost_host,
     		@RequestParam(value="table_schema", required=false, defaultValue="") String table_schema,
     		@RequestParam(value="table_definition", required=false, defaultValue="") String table_definition,
-    		@RequestParam(value="master_host", required=false, defaultValue="") String master_host,
-    		@RequestParam(value="ghost_host", required=false, defaultValue="") String ghost_host,
     		@RequestParam(value="slave_host", required=false, defaultValue="") String slave_host,
-    		@RequestParam(value="alter_statement", required=false, defaultValue="") String alter_statement) {
-		AlterRegistration alterReg = new AlterRegistration();
-		alterReg.setUser_name(user_name);
-		alterReg.setShard(shard);
-		alterReg.setTable_schema(table_schema);
-		alterReg.setTable_definition(table_definition);
-		alterReg.setMaster_host(master_host);
-		alterReg.setGhost_host(ghost_host);
-		alterReg.setSlave_host(slave_host);
-		alterReg.setAlter_statement(alter_statement);
+    		@RequestParam(value="alter_statement", required=false, defaultValue="") String alter_statement,
+		    @RequestParam(value="mysql_dir", required=false, defaultValue="") String mysql_dir,
+		    @RequestParam(value="grpc_port", required=false, defaultValue="") String grpc_port) {
+		int port = Integer.parseInt(grpc_port);
 		
-		/*
-		 * TO-DO prevent dual insert in dashboard
-		 */
+		//Check duplication on dashboard
 		DashBoard dashboard = new DashBoard();
-		dashboard.setShard(shard);
+		dashboard.setGhost_host(ghost_host);
 		dashboard.setTable_schema(table_schema);
 		dashboard.setTable_definition(table_definition);
 		int count = mybatisMapper.dashBoardUniqueCount(dashboard);
-		if(count >= 1) {
-			model.addAttribute("user_name", user_name);
-			redirectAttributes.addAttribute("user_name", user_name);
-			redirectAttributes.addAttribute("message", shard+"."+table_schema+"."+table_definition+" is in progress!");
-			return "redirect:/dashBoard";
-		}
 		
-		/*
-		 * TO-DO
-		 * Implement orange-juice client to call dry run
-		 */
+		
+		// Create channel
+		ManagedChannel channel = ManagedChannelBuilder.forAddress(ghost_host, port).usePlaintext().build();
+		
+		// Create stub object
+		ghostBlockingStub ghostStub = ghostGrpc.newBlockingStub(channel);
+		
+		APIResponse response = null;
+		
+		// Construct disk request
+		diskRequest diskRequest = com.bss.orange.Ghost.diskRequest.newBuilder().setDir(mysql_dir).build();
+		response = ghostStub.diskcheck(diskRequest);
+		String diskSize = response.getResponsemessage();
+		int diskSizeCode = response.getResponsecode();
+		
+		// Construct definition request
+		definitionRequest definitionRequest = com.bss.orange.Ghost.definitionRequest.newBuilder().
+				setSchemaname(table_schema).
+				setTablename(table_definition).build();
+		response = ghostStub.checkdefinition(definitionRequest);
+		String defintion = response.getResponsemessage();
+		int defintionCode = response.getResponsecode();
+		
+		// Construct ghost request
+		ghostRequest ghostRequest = com.bss.orange.Ghost.ghostRequest.newBuilder().
+				setSchemaname(table_schema).
+				setTablename(table_definition).
+				setStatement(alter_statement).build();
+		response = ghostStub.dryrun(ghostRequest);
+		String dryrun = response.getResponsemessage();
+		int dryrunCode = response.getResponsecode();
 		
 		model.addAttribute("user_name", user_name);
-		model.addAttribute("alterReg", alterReg);
-//		model.addAttribute("alterId", alter_id);
-		return "checkdryrun";
+		model.addAttribute("ghost_host", ghost_host);
+		model.addAttribute("table_schema", table_schema);
+		model.addAttribute("slave_host", slave_host);
+		model.addAttribute("alter_statement", alter_statement);
+		
+		model.addAttribute("diskSize", diskSize);
+		model.addAttribute("definition", defintion);
+		model.addAttribute("dryrun", dryrun);
+		
+		if(count >= 1) {
+			redirectAttributes.addAttribute("user_name", user_name);
+			redirectAttributes.addAttribute("message", ghost_host+"."+table_schema+"."+table_definition+" is in progress!");
+			return "redirect:/dashBoard";
+		}else if(diskSizeCode > 0) {
+			redirectAttributes.addAttribute("user_name", user_name);
+			redirectAttributes.addAttribute("message", "disk size error : " + diskSize);
+			return "redirect:/dashBoard";
+		}else if(defintionCode > 0) {
+			redirectAttributes.addAttribute("user_name", user_name);
+			redirectAttributes.addAttribute("message", "definition error: " + defintion);
+			return "redirect:/dashBoard";
+		}else if(dryrunCode > 0) {
+			redirectAttributes.addAttribute("user_name", user_name);
+			redirectAttributes.addAttribute("message", "dryrun error: " + dryrun);
+			return "redirect:/dashBoard";
+		}else {
+			return "checkdryrun";
+		}
 		
 	}
 	
@@ -144,7 +189,7 @@ public class MVCController {
     		@RequestParam(value="slave_host", required=false, defaultValue="") String slave_host,
     		@RequestParam(value="alter_statement", required=false, defaultValue="") String alter_statement) {
 		DashBoard dashBoard = new DashBoard();
-		dashBoard.setShard(shard);
+		dashBoard.setGhost_host(shard);
 		dashBoard.setTable_schema(table_schema);
 		dashBoard.setTable_definition(table_definition);
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());

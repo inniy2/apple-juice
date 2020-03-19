@@ -19,12 +19,14 @@ public class DashBoard {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "dash_board_id", nullable = false)
 	private Long id;
-	@Column(name = "shard", nullable = false)
-	private String shard;
+	@Column(name = "ghost_host", nullable = false)
+	private String ghostHost;
 	@Column(name = "table_schema", nullable = false)
 	private String tableSchema;
 	@Column(name = "table_definition", nullable = false)
 	private String tableDefinition;
+	@Column(name = "statement", nullable = false)
+	private String statement;
 	@Column(name = "start_time", nullable = false)
 	private Timestamp startTime;
 	@Column(name = "user_id", nullable = false)
@@ -39,11 +41,11 @@ public class DashBoard {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getShard() {
-		return shard;
+	public String getGhostHost() {
+		return ghostHost;
 	}
-	public void setShard(String shard) {
-		this.shard = shard;
+	public void setGhostHost(String ghostHost) {
+		this.ghostHost = ghostHost;
 	}
 	public String getTableSchema() {
 		return tableSchema;
@@ -56,6 +58,12 @@ public class DashBoard {
 	}
 	public void setTableDefinition(String tableDefinition) {
 		this.tableDefinition = tableDefinition;
+	}
+	public String getStatement() {
+		return statement;
+	}
+	public void setStatement(String statement) {
+		this.statement = statement;
 	}
 	public Timestamp getStartTime() {
 		return startTime;

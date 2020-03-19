@@ -9,6 +9,7 @@ service ghost{
 	rpc cutover(Empty)                       returns (APIResponse);
 	rpc dryrun(ghostRequest)                 returns (APIResponse);
 	rpc execute(ghostRequest)                returns (APIResponse);
+	rpc interactive(interactiveRequest)      returns (APIResponse);
 }
 
 message Empty{
@@ -31,7 +32,13 @@ message definitionRequest{
 message ghostRequest{
 	string schemaname = 1;
 	string tablename = 2;
-	int32 execute = 3;
+    string statement = 3;
+}
+
+message interactiveRequest{
+	string schemaname = 1;
+	string tablename = 2;
+    string ghostcommand = 3;
 }
 
 

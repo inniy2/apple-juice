@@ -5,9 +5,10 @@ import java.sql.Timestamp;
 public class DashBoard {
 
 	private Long dash_board_id;
-	private String shard;
+	private String ghost_host;
 	private String table_schema;
 	private String table_definition;
+	private String statement;
 	private Timestamp start_time;
 	private String user_id;
 	private String status;
@@ -18,11 +19,11 @@ public class DashBoard {
 	public void setDash_board_id(Long dash_board_id) {
 		this.dash_board_id = dash_board_id;
 	}
-	public String getShard() {
-		return shard;
+	public String getGhost_host() {
+		return ghost_host;
 	}
-	public void setShard(String shard) {
-		this.shard = shard;
+	public void setGhost_host(String ghost_host) {
+		this.ghost_host = ghost_host;
 	}
 	public String getTable_schema() {
 		return table_schema;
@@ -35,6 +36,12 @@ public class DashBoard {
 	}
 	public void setTable_definition(String table_definition) {
 		this.table_definition = table_definition;
+	}
+	public String getStatement() {
+		return statement;
+	}
+	public void setStatement(String statement) {
+		this.statement = statement;
 	}
 	public Timestamp getStart_time() {
 		return start_time;

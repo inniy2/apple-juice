@@ -28,7 +28,7 @@ public class GrapeController {
 		ghostBlockingStub ghostStub = ghostGrpc.newBlockingStub(channel);
 		
 		// Construct request
-		diskRequest diskRequest = com.bss.orange.Ghost.diskRequest.newBuilder().setDir("/mysql/data").build();
+		diskRequest diskRequest = com.bss.orange.Ghost.diskRequest.newBuilder().setDir("/").build();
 		
 		// Call
 		APIResponse respone = ghostStub.diskcheck(diskRequest);

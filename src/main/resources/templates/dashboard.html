@@ -16,18 +16,20 @@
 	<table border="1">
     	<tr>
     		<td>No</td>
-    		<td>Shard</td>
+    		<td>Ghost Host</td>
     		<td>Schema</td>
     		<td>Definition</td>
+    		<td>Statement</td>
     		<td>Start Time</td>
     		<td>User Id</td>
     		<td>Status</td>
     	</tr>	
     	<tr th:each="item, iStat : ${dashboard}">
 			<td th:text="${iStat.index}+1"/>
-			<td th:text="${item.shard}"/>
+			<td th:text="${item.ghost_host}"/>
 			<td th:text="${item.table_schema}"/>
 			<td th:text="${item.table_definition}"/>
+			<td th:text="${item.statement}"/>
 			<td th:text="${item.start_time}"/>
 			<td th:text="${item.user_id}"/>
 			<td>

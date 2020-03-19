@@ -2301,9 +2301,14 @@ public final class Ghost {
         getTablenameBytes();
 
     /**
-     * <code>int32 execute = 3;</code>
+     * <code>string statement = 3;</code>
      */
-    int getExecute();
+    java.lang.String getStatement();
+    /**
+     * <code>string statement = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getStatementBytes();
   }
   /**
    * Protobuf type {@code ghostRequest}
@@ -2320,7 +2325,7 @@ public final class Ghost {
     private ghostRequest() {
       schemaname_ = "";
       tablename_ = "";
-      execute_ = 0;
+      statement_ = "";
     }
 
     @java.lang.Override
@@ -2359,9 +2364,10 @@ public final class Ghost {
               tablename_ = s;
               break;
             }
-            case 24: {
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              execute_ = input.readInt32();
+              statement_ = s;
               break;
             }
             default: {
@@ -2464,13 +2470,38 @@ public final class Ghost {
       }
     }
 
-    public static final int EXECUTE_FIELD_NUMBER = 3;
-    private int execute_;
+    public static final int STATEMENT_FIELD_NUMBER = 3;
+    private volatile java.lang.Object statement_;
     /**
-     * <code>int32 execute = 3;</code>
+     * <code>string statement = 3;</code>
      */
-    public int getExecute() {
-      return execute_;
+    public java.lang.String getStatement() {
+      java.lang.Object ref = statement_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        statement_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string statement = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStatementBytes() {
+      java.lang.Object ref = statement_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        statement_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2493,8 +2524,8 @@ public final class Ghost {
       if (!getTablenameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, tablename_);
       }
-      if (execute_ != 0) {
-        output.writeInt32(3, execute_);
+      if (!getStatementBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, statement_);
       }
       unknownFields.writeTo(output);
     }
@@ -2511,9 +2542,8 @@ public final class Ghost {
       if (!getTablenameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, tablename_);
       }
-      if (execute_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, execute_);
+      if (!getStatementBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, statement_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2535,8 +2565,8 @@ public final class Ghost {
           .equals(other.getSchemaname());
       result = result && getTablename()
           .equals(other.getTablename());
-      result = result && (getExecute()
-          == other.getExecute());
+      result = result && getStatement()
+          .equals(other.getStatement());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2552,8 +2582,8 @@ public final class Ghost {
       hash = (53 * hash) + getSchemaname().hashCode();
       hash = (37 * hash) + TABLENAME_FIELD_NUMBER;
       hash = (53 * hash) + getTablename().hashCode();
-      hash = (37 * hash) + EXECUTE_FIELD_NUMBER;
-      hash = (53 * hash) + getExecute();
+      hash = (37 * hash) + STATEMENT_FIELD_NUMBER;
+      hash = (53 * hash) + getStatement().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2691,7 +2721,7 @@ public final class Ghost {
 
         tablename_ = "";
 
-        execute_ = 0;
+        statement_ = "";
 
         return this;
       }
@@ -2721,7 +2751,7 @@ public final class Ghost {
         com.bss.orange.Ghost.ghostRequest result = new com.bss.orange.Ghost.ghostRequest(this);
         result.schemaname_ = schemaname_;
         result.tablename_ = tablename_;
-        result.execute_ = execute_;
+        result.statement_ = statement_;
         onBuilt();
         return result;
       }
@@ -2778,8 +2808,9 @@ public final class Ghost {
           tablename_ = other.tablename_;
           onChanged();
         }
-        if (other.getExecute() != 0) {
-          setExecute(other.getExecute());
+        if (!other.getStatement().isEmpty()) {
+          statement_ = other.statement_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2948,28 +2979,71 @@ public final class Ghost {
         return this;
       }
 
-      private int execute_ ;
+      private java.lang.Object statement_ = "";
       /**
-       * <code>int32 execute = 3;</code>
+       * <code>string statement = 3;</code>
        */
-      public int getExecute() {
-        return execute_;
+      public java.lang.String getStatement() {
+        java.lang.Object ref = statement_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          statement_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>int32 execute = 3;</code>
+       * <code>string statement = 3;</code>
        */
-      public Builder setExecute(int value) {
-        
-        execute_ = value;
+      public com.google.protobuf.ByteString
+          getStatementBytes() {
+        java.lang.Object ref = statement_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          statement_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string statement = 3;</code>
+       */
+      public Builder setStatement(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        statement_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int32 execute = 3;</code>
+       * <code>string statement = 3;</code>
        */
-      public Builder clearExecute() {
+      public Builder clearStatement() {
         
-        execute_ = 0;
+        statement_ = getDefaultInstance().getStatement();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string statement = 3;</code>
+       */
+      public Builder setStatementBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        statement_ = value;
         onChanged();
         return this;
       }
@@ -3026,6 +3100,830 @@ public final class Ghost {
 
   }
 
+  public interface interactiveRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:interactiveRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string schemaname = 1;</code>
+     */
+    java.lang.String getSchemaname();
+    /**
+     * <code>string schemaname = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getSchemanameBytes();
+
+    /**
+     * <code>string tablename = 2;</code>
+     */
+    java.lang.String getTablename();
+    /**
+     * <code>string tablename = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getTablenameBytes();
+
+    /**
+     * <code>string ghostcommand = 3;</code>
+     */
+    java.lang.String getGhostcommand();
+    /**
+     * <code>string ghostcommand = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getGhostcommandBytes();
+  }
+  /**
+   * Protobuf type {@code interactiveRequest}
+   */
+  public  static final class interactiveRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:interactiveRequest)
+      interactiveRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use interactiveRequest.newBuilder() to construct.
+    private interactiveRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private interactiveRequest() {
+      schemaname_ = "";
+      tablename_ = "";
+      ghostcommand_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private interactiveRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              schemaname_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              tablename_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              ghostcommand_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.bss.orange.Ghost.internal_static_interactiveRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.bss.orange.Ghost.internal_static_interactiveRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.bss.orange.Ghost.interactiveRequest.class, com.bss.orange.Ghost.interactiveRequest.Builder.class);
+    }
+
+    public static final int SCHEMANAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object schemaname_;
+    /**
+     * <code>string schemaname = 1;</code>
+     */
+    public java.lang.String getSchemaname() {
+      java.lang.Object ref = schemaname_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        schemaname_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string schemaname = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSchemanameBytes() {
+      java.lang.Object ref = schemaname_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        schemaname_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TABLENAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object tablename_;
+    /**
+     * <code>string tablename = 2;</code>
+     */
+    public java.lang.String getTablename() {
+      java.lang.Object ref = tablename_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        tablename_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string tablename = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTablenameBytes() {
+      java.lang.Object ref = tablename_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tablename_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int GHOSTCOMMAND_FIELD_NUMBER = 3;
+    private volatile java.lang.Object ghostcommand_;
+    /**
+     * <code>string ghostcommand = 3;</code>
+     */
+    public java.lang.String getGhostcommand() {
+      java.lang.Object ref = ghostcommand_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ghostcommand_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string ghostcommand = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getGhostcommandBytes() {
+      java.lang.Object ref = ghostcommand_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ghostcommand_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getSchemanameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, schemaname_);
+      }
+      if (!getTablenameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, tablename_);
+      }
+      if (!getGhostcommandBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, ghostcommand_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getSchemanameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, schemaname_);
+      }
+      if (!getTablenameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, tablename_);
+      }
+      if (!getGhostcommandBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, ghostcommand_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.bss.orange.Ghost.interactiveRequest)) {
+        return super.equals(obj);
+      }
+      com.bss.orange.Ghost.interactiveRequest other = (com.bss.orange.Ghost.interactiveRequest) obj;
+
+      boolean result = true;
+      result = result && getSchemaname()
+          .equals(other.getSchemaname());
+      result = result && getTablename()
+          .equals(other.getTablename());
+      result = result && getGhostcommand()
+          .equals(other.getGhostcommand());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SCHEMANAME_FIELD_NUMBER;
+      hash = (53 * hash) + getSchemaname().hashCode();
+      hash = (37 * hash) + TABLENAME_FIELD_NUMBER;
+      hash = (53 * hash) + getTablename().hashCode();
+      hash = (37 * hash) + GHOSTCOMMAND_FIELD_NUMBER;
+      hash = (53 * hash) + getGhostcommand().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.bss.orange.Ghost.interactiveRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.bss.orange.Ghost.interactiveRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.bss.orange.Ghost.interactiveRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.bss.orange.Ghost.interactiveRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.bss.orange.Ghost.interactiveRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.bss.orange.Ghost.interactiveRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.bss.orange.Ghost.interactiveRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.bss.orange.Ghost.interactiveRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.bss.orange.Ghost.interactiveRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.bss.orange.Ghost.interactiveRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.bss.orange.Ghost.interactiveRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.bss.orange.Ghost.interactiveRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.bss.orange.Ghost.interactiveRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code interactiveRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:interactiveRequest)
+        com.bss.orange.Ghost.interactiveRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.bss.orange.Ghost.internal_static_interactiveRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.bss.orange.Ghost.internal_static_interactiveRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.bss.orange.Ghost.interactiveRequest.class, com.bss.orange.Ghost.interactiveRequest.Builder.class);
+      }
+
+      // Construct using com.bss.orange.Ghost.interactiveRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        schemaname_ = "";
+
+        tablename_ = "";
+
+        ghostcommand_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.bss.orange.Ghost.internal_static_interactiveRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public com.bss.orange.Ghost.interactiveRequest getDefaultInstanceForType() {
+        return com.bss.orange.Ghost.interactiveRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.bss.orange.Ghost.interactiveRequest build() {
+        com.bss.orange.Ghost.interactiveRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.bss.orange.Ghost.interactiveRequest buildPartial() {
+        com.bss.orange.Ghost.interactiveRequest result = new com.bss.orange.Ghost.interactiveRequest(this);
+        result.schemaname_ = schemaname_;
+        result.tablename_ = tablename_;
+        result.ghostcommand_ = ghostcommand_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.bss.orange.Ghost.interactiveRequest) {
+          return mergeFrom((com.bss.orange.Ghost.interactiveRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.bss.orange.Ghost.interactiveRequest other) {
+        if (other == com.bss.orange.Ghost.interactiveRequest.getDefaultInstance()) return this;
+        if (!other.getSchemaname().isEmpty()) {
+          schemaname_ = other.schemaname_;
+          onChanged();
+        }
+        if (!other.getTablename().isEmpty()) {
+          tablename_ = other.tablename_;
+          onChanged();
+        }
+        if (!other.getGhostcommand().isEmpty()) {
+          ghostcommand_ = other.ghostcommand_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.bss.orange.Ghost.interactiveRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.bss.orange.Ghost.interactiveRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object schemaname_ = "";
+      /**
+       * <code>string schemaname = 1;</code>
+       */
+      public java.lang.String getSchemaname() {
+        java.lang.Object ref = schemaname_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          schemaname_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string schemaname = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSchemanameBytes() {
+        java.lang.Object ref = schemaname_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          schemaname_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string schemaname = 1;</code>
+       */
+      public Builder setSchemaname(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        schemaname_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string schemaname = 1;</code>
+       */
+      public Builder clearSchemaname() {
+        
+        schemaname_ = getDefaultInstance().getSchemaname();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string schemaname = 1;</code>
+       */
+      public Builder setSchemanameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        schemaname_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object tablename_ = "";
+      /**
+       * <code>string tablename = 2;</code>
+       */
+      public java.lang.String getTablename() {
+        java.lang.Object ref = tablename_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tablename_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string tablename = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTablenameBytes() {
+        java.lang.Object ref = tablename_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tablename_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string tablename = 2;</code>
+       */
+      public Builder setTablename(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        tablename_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tablename = 2;</code>
+       */
+      public Builder clearTablename() {
+        
+        tablename_ = getDefaultInstance().getTablename();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string tablename = 2;</code>
+       */
+      public Builder setTablenameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        tablename_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object ghostcommand_ = "";
+      /**
+       * <code>string ghostcommand = 3;</code>
+       */
+      public java.lang.String getGhostcommand() {
+        java.lang.Object ref = ghostcommand_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ghostcommand_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string ghostcommand = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getGhostcommandBytes() {
+        java.lang.Object ref = ghostcommand_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ghostcommand_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string ghostcommand = 3;</code>
+       */
+      public Builder setGhostcommand(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        ghostcommand_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ghostcommand = 3;</code>
+       */
+      public Builder clearGhostcommand() {
+        
+        ghostcommand_ = getDefaultInstance().getGhostcommand();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ghostcommand = 3;</code>
+       */
+      public Builder setGhostcommandBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        ghostcommand_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:interactiveRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:interactiveRequest)
+    private static final com.bss.orange.Ghost.interactiveRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.bss.orange.Ghost.interactiveRequest();
+    }
+
+    public static com.bss.orange.Ghost.interactiveRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<interactiveRequest>
+        PARSER = new com.google.protobuf.AbstractParser<interactiveRequest>() {
+      @java.lang.Override
+      public interactiveRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new interactiveRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<interactiveRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<interactiveRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.bss.orange.Ghost.interactiveRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Empty_descriptor;
   private static final 
@@ -3051,6 +3949,11 @@ public final class Ghost {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ghostRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_interactiveRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_interactiveRequest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3064,15 +3967,18 @@ public final class Ghost {
       "\017responsemessage\030\001 \001(\t\022\024\n\014responsecode\030\002" +
       " \001(\005\"\032\n\013diskRequest\022\013\n\003dir\030\001 \001(\t\":\n\021defi" +
       "nitionRequest\022\022\n\nschemaname\030\001 \001(\t\022\021\n\ttab" +
-      "lename\030\002 \001(\t\"F\n\014ghostRequest\022\022\n\nschemana" +
-      "me\030\001 \001(\t\022\021\n\ttablename\030\002 \001(\t\022\017\n\007execute\030\003" +
-      " \001(\0052\325\001\n\005ghost\022\'\n\tdiskcheck\022\014.diskReques" +
-      "t\032\014.APIResponse\0223\n\017checkdefinition\022\022.def" +
-      "initionRequest\032\014.APIResponse\022\037\n\007cutover\022" +
-      "\006.Empty\032\014.APIResponse\022%\n\006dryrun\022\r.ghostR" +
-      "equest\032\014.APIResponse\022&\n\007execute\022\r.ghostR" +
-      "equest\032\014.APIResponseB\020\n\016com.bss.orangeb\006" +
-      "proto3"
+      "lename\030\002 \001(\t\"H\n\014ghostRequest\022\022\n\nschemana" +
+      "me\030\001 \001(\t\022\021\n\ttablename\030\002 \001(\t\022\021\n\tstatement" +
+      "\030\003 \001(\t\"Q\n\022interactiveRequest\022\022\n\nschemana" +
+      "me\030\001 \001(\t\022\021\n\ttablename\030\002 \001(\t\022\024\n\014ghostcomm" +
+      "and\030\003 \001(\t2\207\002\n\005ghost\022\'\n\tdiskcheck\022\014.diskR" +
+      "equest\032\014.APIResponse\0223\n\017checkdefinition\022" +
+      "\022.definitionRequest\032\014.APIResponse\022\037\n\007cut" +
+      "over\022\006.Empty\032\014.APIResponse\022%\n\006dryrun\022\r.g" +
+      "hostRequest\032\014.APIResponse\022&\n\007execute\022\r.g" +
+      "hostRequest\032\014.APIResponse\0220\n\013interactive" +
+      "\022\023.interactiveRequest\032\014.APIResponseB\020\n\016c" +
+      "om.bss.orangeb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3115,7 +4021,13 @@ public final class Ghost {
     internal_static_ghostRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ghostRequest_descriptor,
-        new java.lang.String[] { "Schemaname", "Tablename", "Execute", });
+        new java.lang.String[] { "Schemaname", "Tablename", "Statement", });
+    internal_static_interactiveRequest_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_interactiveRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_interactiveRequest_descriptor,
+        new java.lang.String[] { "Schemaname", "Tablename", "Ghostcommand", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

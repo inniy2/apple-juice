@@ -11,14 +11,14 @@
     <h2 class="hello-title" th:text="'Hello '+${user_name}"></h2>
 	<form action="/checkDryRun" method="post">
     	<input hidden="text" name="user_name" th:value="${user_name}">
-		<input type="text" placeholder="Shard Name" name="shard" required>
-		<input type="text" placeholder="Table Schema Name" name="table_schema" required>
-		<input type="text" placeholder="Table Definition Name" name="table_definition" required>
-		<input type="text" placeholder="MySQL Master Host Name" name="master_host" required>
-		<input type="text" placeholder="Ghost Host Name" name="ghost_host" required>
-		<input type="text" placeholder="Slave Host Name" name="slave_host" required>
-		<textarea placeholder="Alter Statement" name="alter_statement" required></textarea>
-		<button type="submit">run test</button>
+		Ghost Host: <input type="text" placeholder="Ghost Host Name" name="ghost_host" required></br>
+		Schema: <input type="text" placeholder="Table Schema Name" name="table_schema" required></br>
+		Table: <input type="text" placeholder="Table Definition Name" name="table_definition" required></br>
+		Slave: <input type="text" placeholder="Slave Host Name" name="slave_host" required></br>
+		Statement: <textarea placeholder="Alter Statement" name="alter_statement" required></textarea></br>
+		MySQL directory: <input type="text" placeholder="MySQL Dir" name="mysql_dir" required></br>
+		Grpc port: <input type="text" placeholder="Grpc Port" name="grpc_port" required></br>
+		<button type="submit">Check</button>
     </form>
 </body>
 </html>

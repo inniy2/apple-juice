@@ -187,6 +187,38 @@ public final class ghostGrpc {
      return getExecuteMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.bss.orange.Ghost.interactiveRequest,
+      com.bss.orange.Ghost.APIResponse> getInteractiveMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "interactive",
+      requestType = com.bss.orange.Ghost.interactiveRequest.class,
+      responseType = com.bss.orange.Ghost.APIResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.bss.orange.Ghost.interactiveRequest,
+      com.bss.orange.Ghost.APIResponse> getInteractiveMethod() {
+    io.grpc.MethodDescriptor<com.bss.orange.Ghost.interactiveRequest, com.bss.orange.Ghost.APIResponse> getInteractiveMethod;
+    if ((getInteractiveMethod = ghostGrpc.getInteractiveMethod) == null) {
+      synchronized (ghostGrpc.class) {
+        if ((getInteractiveMethod = ghostGrpc.getInteractiveMethod) == null) {
+          ghostGrpc.getInteractiveMethod = getInteractiveMethod = 
+              io.grpc.MethodDescriptor.<com.bss.orange.Ghost.interactiveRequest, com.bss.orange.Ghost.APIResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "ghost", "interactive"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.bss.orange.Ghost.interactiveRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.bss.orange.Ghost.APIResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new ghostMethodDescriptorSupplier("interactive"))
+                  .build();
+          }
+        }
+     }
+     return getInteractiveMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -249,6 +281,13 @@ public final class ghostGrpc {
       asyncUnimplementedUnaryCall(getExecuteMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void interactive(com.bss.orange.Ghost.interactiveRequest request,
+        io.grpc.stub.StreamObserver<com.bss.orange.Ghost.APIResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getInteractiveMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -286,6 +325,13 @@ public final class ghostGrpc {
                 com.bss.orange.Ghost.ghostRequest,
                 com.bss.orange.Ghost.APIResponse>(
                   this, METHODID_EXECUTE)))
+          .addMethod(
+            getInteractiveMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.bss.orange.Ghost.interactiveRequest,
+                com.bss.orange.Ghost.APIResponse>(
+                  this, METHODID_INTERACTIVE)))
           .build();
     }
   }
@@ -347,6 +393,14 @@ public final class ghostGrpc {
       asyncUnaryCall(
           getChannel().newCall(getExecuteMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void interactive(com.bss.orange.Ghost.interactiveRequest request,
+        io.grpc.stub.StreamObserver<com.bss.orange.Ghost.APIResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getInteractiveMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -400,6 +454,13 @@ public final class ghostGrpc {
     public com.bss.orange.Ghost.APIResponse execute(com.bss.orange.Ghost.ghostRequest request) {
       return blockingUnaryCall(
           getChannel(), getExecuteMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.bss.orange.Ghost.APIResponse interactive(com.bss.orange.Ghost.interactiveRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getInteractiveMethod(), getCallOptions(), request);
     }
   }
 
@@ -460,6 +521,14 @@ public final class ghostGrpc {
       return futureUnaryCall(
           getChannel().newCall(getExecuteMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.bss.orange.Ghost.APIResponse> interactive(
+        com.bss.orange.Ghost.interactiveRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getInteractiveMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_DISKCHECK = 0;
@@ -467,6 +536,7 @@ public final class ghostGrpc {
   private static final int METHODID_CUTOVER = 2;
   private static final int METHODID_DRYRUN = 3;
   private static final int METHODID_EXECUTE = 4;
+  private static final int METHODID_INTERACTIVE = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -503,6 +573,10 @@ public final class ghostGrpc {
           break;
         case METHODID_EXECUTE:
           serviceImpl.execute((com.bss.orange.Ghost.ghostRequest) request,
+              (io.grpc.stub.StreamObserver<com.bss.orange.Ghost.APIResponse>) responseObserver);
+          break;
+        case METHODID_INTERACTIVE:
+          serviceImpl.interactive((com.bss.orange.Ghost.interactiveRequest) request,
               (io.grpc.stub.StreamObserver<com.bss.orange.Ghost.APIResponse>) responseObserver);
           break;
         default:
@@ -571,6 +645,7 @@ public final class ghostGrpc {
               .addMethod(getCutoverMethod())
               .addMethod(getDryrunMethod())
               .addMethod(getExecuteMethod())
+              .addMethod(getInteractiveMethod())
               .build();
         }
       }
