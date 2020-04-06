@@ -148,6 +148,7 @@ public class MVCController {
 		model.addAttribute("user_name", user_name);
 		model.addAttribute("ghost_host", ghost_host);
 		model.addAttribute("table_schema", table_schema);
+		model.addAttribute("table_definition", table_definition);
 		model.addAttribute("slave_host", slave_host);
 		model.addAttribute("alter_statement", alter_statement);
 		
@@ -167,10 +168,6 @@ public class MVCController {
 			redirectAttributes.addAttribute("user_name", user_name);
 			redirectAttributes.addAttribute("message", "definition error: " + defintion);
 			return "redirect:/dashBoard";
-		}else if(dryrunCode > 0) {
-			redirectAttributes.addAttribute("user_name", user_name);
-			redirectAttributes.addAttribute("message", "dryrun error: " + dryrun);
-			return "redirect:/dashBoard";
 		}else {
 			return "checkdryrun";
 		}
@@ -181,17 +178,17 @@ public class MVCController {
 	public String execute(Model model,
 			RedirectAttributes redirectAttributes,
 	   		@RequestParam(value="user_name", required=false, defaultValue="") String user_name,
-    		@RequestParam(value="shard", required=false, defaultValue="") String shard,
+    		@RequestParam(value="ghost_host", required=false, defaultValue="") String ghost_host,
     		@RequestParam(value="table_schema", required=false, defaultValue="") String table_schema,
     		@RequestParam(value="table_definition", required=false, defaultValue="") String table_definition,
     		@RequestParam(value="master_host", required=false, defaultValue="") String master_host,
-    		@RequestParam(value="ghost_host", required=false, defaultValue="") String ghost_host,
     		@RequestParam(value="slave_host", required=false, defaultValue="") String slave_host,
     		@RequestParam(value="alter_statement", required=false, defaultValue="") String alter_statement) {
 		DashBoard dashBoard = new DashBoard();
-		dashBoard.setGhost_host(shard);
+		dashBoard.setGhost_host(ghost_host);
 		dashBoard.setTable_schema(table_schema);
 		dashBoard.setTable_definition(table_definition);
+		dashBoard.setStatement(alter_statement);
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		dashBoard.setStart_time(timestamp);
 		dashBoard.setUser_id(user_name);
@@ -208,6 +205,47 @@ public class MVCController {
 		return "redirect:/dashBoard";
 	}
 	
+	@PostMapping({"/status"})
+    public String status(Model model,
+    		RedirectAttributes redirectAttributes,
+    		@RequestParam(value="user_name", required=false, defaultValue="") String user_name,
+    		@RequestParam(value="board_id", required=false, defaultValue="") String board_id,
+    		@RequestParam(value="no", required=false, defaultValue="") String no,
+    		@RequestParam(value="ghost_host", required=false, defaultValue="") String ghost_host,
+    		@RequestParam(value="table_schema", required=false, defaultValue="") String table_schema,
+    		@RequestParam(value="table_definition", required=false, defaultValue="") String table_definition,
+    		@RequestParam(value="statement", required=false, defaultValue="") String statement,
+    		@RequestParam(value="start_time", required=false, defaultValue="") String start_time,
+    		@RequestParam(value="user_id", required=false, defaultValue="") String user_id) {
+		model.addAttribute("user_name", user_name);
+		model.addAttribute("board_id", board_id);
+		model.addAttribute("no", no);
+		model.addAttribute("ghost_host", ghost_host);
+		model.addAttribute("table_schema", table_schema);
+		model.addAttribute("table_definition", table_definition);
+		model.addAttribute("statement", statement);
+		model.addAttribute("start_time", start_time);
+		model.addAttribute("user_id", user_id);
+		return "status";
+    }
 	
+	@PostMapping({"/cutover"})
+    public String cutOver(Model model,
+    		RedirectAttributes redirectAttributes,
+    		@RequestParam(value="user_name", required=false, defaultValue="") String user_name,
+    		@RequestParam(value="ghost_host", required=false, defaultValue="") String ghost_host,
+    		@RequestParam(value="board_id", required=false, defaultValue="") String board_id) {
+		model.addAttribute("user_name", user_name);
+		model.addAttribute("ghost_host", ghost_host);
+		String grpcPort = "9090";
+		/*
+		 * TO-DO
+		 * Cut over
+		 */
+		mybatisMapper.deleteBoardRecord(Integer.parseInt(board_id));
+		
+		redirectAttributes.addAttribute("user_name", user_name);
+		return "redirect:/dashBoard";
+    }
 	
 }

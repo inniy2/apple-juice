@@ -3,6 +3,7 @@ package com.bss.grape.entity;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -33,7 +34,9 @@ public interface MybatisMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "dash_board_id")
 	void bashBoardInsert(DashBoard dashboard);
 	
-	
+	@Delete("DELETE FROM dash_board "
+			+ "WHERE dash_board_id = #{dash_board_id}")
+	int deleteBoardRecord(int dash_board_id);
 	
 	
 	

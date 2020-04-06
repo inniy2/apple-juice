@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cut Over</title>
+<link href="../css/main.css" rel="stylesheet">
+<script src="../js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../js/status.js"></script>
+</head>
+<body>
+    <h2 class="hello-title" th:text="${message}"></h2>
+    <h2 class="hello-title" th:text="'Hello '+${user_name}"></h2>
+    
+    <p th:text="'board_id is ' + ${board_id}"/>
+    <p th:text="'No is ' + ${no}"/>
+    <p th:text="'Ghost host is ' + ${ghost_host}"/>
+    <p th:text="'table_schema is ' + ${table_schema}"/>
+    <p th:text="'table_definition is ' + ${table_definition}"/>
+    <p th:text="'statement is ' + ${statement}"/>
+    <p th:text="'start_time is ' + ${start_time}"/>
+    <p th:text="'user_id is ' + ${user_id}"/>
+    
+    <button class="status" >Ghost Status</button> <br/>
+    <textarea id="ghostStatus" disabled></textarea>
+    <form action="/cutover" method="post">
+		<input type="hidden" name="user_name" th:value="${user_name}">
+		<input type="hidden" name="ghost_host" th:value="${ghost_host}">
+		<input type="hidden" name="board_id" th:value="${board_id}">
+		<button type="submit">Cut Over</button>
+    </form>
+    
+</body>
+</html>

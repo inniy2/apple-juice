@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bss.orange.Ghost.APIResponse;
 import com.bss.orange.Ghost.diskRequest;
+import com.bss.orange.Ghost.interactiveRequest;
 import com.bss.orange.Ghost.definitionRequest;
 import com.bss.orange.ghostGrpc;
 import com.bss.orange.ghostGrpc.ghostBlockingStub;
@@ -68,5 +69,33 @@ public class GrapeController {
 	@ResponseBody
 	public void execute(@RequestParam(value="user_name", required=false, defaultValue="") String user_name) {
 		System.out.println(user_name);
+	}
+	
+	@RequestMapping(value="/api/ghostcommand", method=RequestMethod.GET)
+	@ResponseBody
+	public String ghostCommand(
+			@RequestParam(value="ghost_host", required=false, defaultValue="") String ghost_host,
+			@RequestParam(value="grpc_port", required=false, defaultValue="") String grpcPort,
+			@RequestParam(value="table_schema", required=false, defaultValue="") String table_schema,
+			@RequestParam(value="table_definition", required=false, defaultValue="") String table_definition,
+			@RequestParam(value="ghostCommand", required=false, defaultValue="") String ghostCommand) {
+		// Create channel
+		ManagedChannel channel = ManagedChannelBuilder.forAddress(ghost_host, Integer.parseInt(grpcPort)).usePlaintext().build();
+
+		// Create stub object
+		ghostBlockingStub ghostStub = ghostGrpc.newBlockingStub(channel);
+		
+		// Construct request
+		interactiveRequest interactiveRequest = com.bss.orange.Ghost.interactiveRequest.newBuilder().
+				setSchemaname(table_schema).
+				setTablename(table_definition).
+				setGhostcommand(ghostCommand).build();
+		
+		// Call
+		APIResponse respone = ghostStub.interactive(interactiveRequest);
+		
+		
+		System.out.println(respone.getResponsemessage());
+		return respone.getResponsemessage();
 	}
 }
